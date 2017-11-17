@@ -1,0 +1,168 @@
+CREATE TABLE "Films" (
+	"id" serial NOT NULL,
+	"Name" TEXT NOT NULL ,
+	"Studio" integer NOT NULL,
+	"Year" integer NOT NULL,
+	"Tagline" TEXT,
+	"Producer" integer NOT NULL ,
+	"Name Main Actor" integer NOT NULL ,
+	"Name Personage" integer NOT NULL ,
+	"Genre" integer NOT NULL ,
+	"Runtime" integer NOT NULL ,
+	"Rating" TEXT NOT NULL ,
+	CONSTRAINT Films_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Producer" (
+	"id" serial NOT NULL,
+	"First Name " TEXT NOT NULL ,
+	"Second Name" TEXT NOT NULL ,
+	"Date of Birth" DATE NOT NULL,
+	"Place of Birth" integer NOT NULL,
+	"Total number of films" integer NOT NULL,
+	CONSTRAINT Producer_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Genre" (
+	"id" serial NOT NULL,
+	"Name Genre" TEXT NOT NULL UNIQUE ,
+	CONSTRAINT Genre_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Studio" (
+	"id" serial NOT NULL,
+	"Name Studio" TEXT NOT NULL UNIQUE ,
+	CONSTRAINT Studio_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "City" (
+	"id" serial NOT NULL,
+	"Name" TEXT NOT NULL UNIQUE ,
+	"Country" integer NOT NULL,
+	CONSTRAINT City_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Country" (
+	"id" serial NOT NULL,
+	"Name " TEXT NOT NULL UNIQUE ,
+	CONSTRAINT Country_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Actors" (
+	"id" serial NOT NULL,
+	"First Name Actor" TEXT NOT NULL ,
+	"Second Name Actor" TEXT NOT NULL ,
+	"Date of Birth" DATE NOT NULL,
+	"Place of Birth" integer NOT NULL,
+	CONSTRAINT Actors_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Protagonist" (
+	"id" serial NOT NULL,
+	"Name Protogonist" TEXT NOT NULL ,
+	CONSTRAINT Protagonist_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+INSERT INTO "Actors" VALUES (2, 'Chris', 'Evans', '1981-06-13', 4);
+INSERT INTO "Actors" VALUES (1, 'Robert', 'Downey Jr.', '1965-04-04', 1);
+INSERT INTO "Actors" VALUES (3, 'Edward', 'Norton', '1969-08-18', 4);
+INSERT INTO "Actors" VALUES (4, 'Artem ', 'Bistrov', '1985-03-19', 8);
+INSERT INTO "Actors" VALUES (5, 'Denis', 'Shvedov', '1981-10-24', 9);
+
+INSERT INTO "City" VALUES (2, 'Pittsburg', 1);
+INSERT INTO "City" VALUES (1, 'New York', 1);
+INSERT INTO "City" VALUES (4, 'Boston', 1);
+INSERT INTO "City" VALUES (3, 'Austin', 1);
+INSERT INTO "City" VALUES (6, 'Paris', 2);
+INSERT INTO "City" VALUES (5, 'Clevburg', 1);
+INSERT INTO "City" VALUES (9, 'Moscow', 3);
+INSERT INTO "City" VALUES (8, 'Nijnii Novgorod', 3);
+INSERT INTO "City" VALUES (7, 'Novomichurinsk', 3);
+
+INSERT INTO "Country" VALUES (2, 'France');
+INSERT INTO "Country" VALUES (1, 'USA');
+INSERT INTO "Country" VALUES (3, 'Russia');
+
+INSERT INTO "Films" VALUES (2, 'Iron Man 2', 1, 2010, NULL, 1, 1, 1, 1, 125, 'PG-13');
+INSERT INTO "Films" VALUES (1, 'Iron Man ', 1, 2008, NULL, 1, 1, 1, 1, 127, 'PG-13');
+INSERT INTO "Films" VALUES (4, 'Captain America ', 1, 2011, NULL, 3, 2, 2, 1, 124, 'PG-13');
+INSERT INTO "Films" VALUES (3, 'Iron Man 3', 2, 2013, NULL, 2, 1, 1, 1, 131, 'PG-13');
+INSERT INTO "Films" VALUES (6, 'The Hulk', 3, 2008, NULL, 5, 3, 3, 1, 112, 'PG-13');
+INSERT INTO "Films" VALUES (5, 'Captain America 2', 2, 2014, NULL, 4, 2, 2, 1, 136, 'PG-13');
+INSERT INTO "Films" VALUES (8, 'Maior', 4, 2013, NULL, 6, 5, 5, 2, 99, '18+');
+INSERT INTO "Films" VALUES (7, 'Durak', 4, 2014, NULL, 6, 4, 4, 2, 116, '16+');
+
+INSERT INTO "Producer" VALUES (2, 'Stane', 'Black', '1961-12-16', 2, 43);
+INSERT INTO "Producer" VALUES (1, 'Jon', 'Favreau', '1966-10-19', 1, 138);
+INSERT INTO "Producer" VALUES (4, 'Anthony', 'Russo', '1970-02-03', 4, 38);
+INSERT INTO "Producer" VALUES (3, 'Joe', 'Johnston', '1950-05-13', 3, 31);
+INSERT INTO "Producer" VALUES (5, 'Louis', 'Leterrier', '1973-05-17', 5, 24);
+INSERT INTO "Producer" VALUES (6, 'Yra', 'Bikov', '1981-08-15', 6, 24);
+
+
+
+INSERT INTO "Protagonist" VALUES (2, 'Captain America\Steave Rojers');
+INSERT INTO "Protagonist" VALUES (1, 'Tony Stark\Iron Man');
+INSERT INTO "Protagonist" VALUES (3, 'Bruce Banner\Hulk');
+INSERT INTO "Protagonist" VALUES (4, 'Nikitin');
+INSERT INTO "Protagonist" VALUES (5, 'Sergey Sobolev');
+
+
+
+
+INSERT INTO "Studio" VALUES (2, 'Marvel Studios');
+INSERT INTO "Studio" VALUES (1, 'Paramount');
+INSERT INTO "Studio" VALUES (3, 'Universal');
+INSERT INTO "Studio" VALUES (4, 'Rock Films');
+
+INSERT INTO "Genre" VALUES (1, 'Action\Adventure');
+INSERT INTO "Genre" VALUES (2, 'Drama');
+
+
+
+
+ALTER TABLE "Films" ADD CONSTRAINT "Films_fk0" FOREIGN KEY ("Studio") REFERENCES "Studio"("id");
+ALTER TABLE "Films" ADD CONSTRAINT "Films_fk1" FOREIGN KEY ("Producer") REFERENCES "Producer"("id");
+ALTER TABLE "Films" ADD CONSTRAINT "Films_fk2" FOREIGN KEY ("Name Main Actor") REFERENCES "Actors"("id");
+ALTER TABLE "Films" ADD CONSTRAINT "Films_fk3" FOREIGN KEY ("Name Personage") REFERENCES "Protagonist"("id");
+ALTER TABLE "Films" ADD CONSTRAINT "Films_fk4" FOREIGN KEY ("Genre") REFERENCES "Genre"("id");
+
+ALTER TABLE "Producer" ADD CONSTRAINT "Producer_fk1" FOREIGN KEY ("Place of Birth") REFERENCES "City"("id");
+
+
+
+ALTER TABLE "City" ADD CONSTRAINT "City_fk0" FOREIGN KEY ("Country") REFERENCES "Country"("id");
+
+ALTER TABLE "Actors" ADD CONSTRAINT "Actors_fk1" FOREIGN KEY ("Place of Birth") REFERENCES "City"("id");
+
+
+

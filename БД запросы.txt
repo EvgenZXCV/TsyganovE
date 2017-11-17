@@ -1,0 +1,16 @@
+1)Выбирает фильмы,у которого id продюссер = 1.
+
+SELECT "Name"  FROM "Films" WHERE "Producer"=1;
+
+2)Выбирает Актеров,которые родились позже 1981-04-04.
+
+SELECT "First Name Actor","Second Name Actor" FROM "Actors" WHERE "Date of Birth" >='1981-04-04';
+
+3)Выбирает Режиссеров,количество фильмов которых больше 35. Сортирует в порядке возрастания.
+
+ SELECT "Total number of films" FROM "Producer" WHERE "Total number of films" >35
+ORDER BY "Total number of films";
+
+4)Выбирает города,которые находятся в USA.
+
+SELECT "Name"  FROM "City" WHERE "Country"=1;
